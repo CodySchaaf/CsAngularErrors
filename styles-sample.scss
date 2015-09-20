@@ -68,32 +68,6 @@
   background-color: lightcoral;
 }
 
-[cs-errors-form] {
-  [cs-errors].form-group .text-danger, &.form-without-form-groups .cs-errors-form-level-error.text-danger {
-    @include cs-errors-hide-error;
-  }
-  //place any additional custom input field un-styling in here
-  input.ng-invalid, textarea.ng-invalid, select.ng-invalid { // [date-picker].ng-invalid input
-    //override standard invalid state
-    @include valid-input;
-  }
-
-  &.reveal-errors {
-    //place any additional custom input field re-styling in here
-    input.ng-invalid, textarea.ng-invalid, select.ng-invalid { //[date-picker].ng-invalid input
-      //override standard invalid state
-      @include invalid-input;
-      &:focus {
-        @include valid-input;
-      }
-    }
-
-    .text-danger, &.form-without-form-groups .cs-errors-form-level-error.text-danger {
-      @include cs-errors-reveal-error;
-    }
-  }
-}
-
 
 [cs-errors-form] [cs-errors].form-group {
   .text-danger {

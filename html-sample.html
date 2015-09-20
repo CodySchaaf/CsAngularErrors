@@ -1,5 +1,5 @@
 <form name="userForm" cs-errors-form novalidate>
-  <div class="form-group" show-errors="{ needsRenderCheck: true }">
+  <div class="form-group" cs-errors="{ needsRenderCheck: true }">
     <!-- with a custom drop-down directive using render check because element with name wont be available initially to bind blur to -->
     <div dropdown-menu
          options="someOptions"
@@ -12,14 +12,14 @@
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" cs-errors>
     <input type="text" name="name" ng-model="user.name" ng-required="true"/>
     <div ng-messages="userForm.name.$error">
       <p class="text-danger" ng-message="required">You forgot your name.</p>
     </div>
   </div>
 
-  <div class="form-group">
+  <div class="form-group" cs-errors>
     <input type="text" name="name" ng-model="user.number" ng-minlength="7" ng-required="true"/>
     <div ng-messages="userForm.name.$error">
       <p class="text-danger" ng-message="required">You forgot your number.</p>

@@ -12,6 +12,7 @@ var runSequence = require('run-sequence');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
+var annotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
 
 var paths = {
@@ -79,6 +80,7 @@ gulp.task('browserify', function () {
     .pipe(source('app/build/index.js'))
     .pipe(buffer())
     // Add transformation tasks to the pipeline here.
+    .pipe(annotate())
     .pipe(uglify())
     .pipe(rename(function(path){ path.extname = ".min.js"}))
     .pipe(gulp.dest('.'));
