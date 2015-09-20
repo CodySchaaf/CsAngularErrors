@@ -50,11 +50,11 @@ module cs.errors {
         /**
          * needsRenderCheck is used when a custom directive needs to render before the named element would be visible
          *
-         * <div class="form-group" show-errors="{ needsRenderCheck: true }">
+         * <div class="form-group" cs-errors="{ needsRenderCheck: true }">
          *   <div dropdown-menu
          *        options="someOptions"
-         *        cs-required="true" //to be fed to inner ng-required
-         *        form-name="dropdownForm" //adds name to inner ng-form that needs render check
+         *        dropdown-menu-required="true" //to be fed to inner ng-required
+         *        dropdown-menu-name="dropdownForm" //adds name to inner ng-form that needs render check
          *        cs-errors-helper></div>
          *   <div ng-messages="outerForm.dropdownForm.$error"> //notice matching dropdown form from what is passed in to ng-form
          *      <p class="text-danger" ng-message="required">Please Select Something.</p>
