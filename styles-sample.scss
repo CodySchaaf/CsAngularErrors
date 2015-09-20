@@ -1,0 +1,122 @@
+@mixin cs-errors-hide-error() {
+  height: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  opacity: 0;
+}
+
+@mixin cs-errors-reveal-error() {
+  $helpBlockHeight: 20px;
+  $helpBlockMarginTop: 5px;
+  $helpBlockMarginBottom: 10px;
+  $animationLength: .4s;
+  height: $helpBlockHeight;
+  margin-top: $helpBlockMarginTop;
+  margin-bottom: $helpBlockMarginBottom;
+  opacity: 1;
+  @extend .cs-animate.slide-and-fade-bonus;
+}
+
+.cs-animate {
+  &.slide-and-fade-bonus {
+    @keyframes slide-and-fade-in {
+      0% {
+        height: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        opacity: 0;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    @keyframes slide-and-fade-out {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      100% {
+        height: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        opacity: 0;
+      }
+    }
+    $time: .4s;
+    animation: slide-and-fade-in $time ease-in-out;
+    &.ng-enter { //used with ng-if (preferred method since it is simpler and allows for arbitrary dimensions)
+      animation: slide-and-fade-in $time ease-in-out;
+    }
+    &.ng-leave {
+      animation: slide-and-fade-out $time ease-in-out;
+    }
+  }
+}
+
+@mixin valid-input() {
+  border-color: gray;
+  background-color: white;
+}
+
+@mixin invalid-input() {
+  border-color: red;
+  background-color: lightcoral;
+}
+
+[cs-errors-form] {
+  [cs-errors].form-group .text-danger, &.form-without-form-groups .cs-errors-form-level-error.text-danger {
+    @include cs-errors-hide-error;
+  }
+  //place any additional custom input field un-styling in here
+  input.ng-invalid, textarea.ng-invalid, select.ng-invalid { // [date-picker].ng-invalid input
+    //override standard invalid state
+    @include valid-input;
+  }
+
+  &.reveal-errors {
+    //place any additional custom input field re-styling in here
+    input.ng-invalid, textarea.ng-invalid, select.ng-invalid { //[date-picker].ng-invalid input
+      //override standard invalid state
+      @include invalid-input;
+      &:focus {
+        @include valid-input;
+      }
+    }
+
+    .text-danger, &.form-without-form-groups .cs-errors-form-level-error.text-danger {
+      @include cs-errors-reveal-error;
+    }
+  }
+}
+
+
+[cs-errors-form] [cs-errors].form-group {
+  .text-danger {
+    @include cs-errors-hide-error;
+  }
+  //place any additional custom input field un-styling in here
+  input.ng-invalid, textarea.ng-invalid, select.ng-invalid { // [date-picker].ng-invalid input
+    //override standard invalid state
+    @include valid-input;
+  }
+
+  &.reveal-errors {
+    //place any additional custom input field re-styling in here
+    input.ng-invalid, textarea.ng-invalid, select.ng-invalid { //[date-picker].ng-invalid input
+      //override standard invalid state
+      @include invalid-input;
+      &:focus {
+        @include valid-input;
+      }
+    }
+
+    .text-danger {
+      @include cs-errors-reveal-error;
+    }
+  }
+}

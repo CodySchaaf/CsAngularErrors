@@ -1,0 +1,32 @@
+<form name="userForm" cs-errors-form novalidate>
+  <div class="form-group" show-errors="{ needsRenderCheck: true }">
+    <!-- with a custom drop-down directive using render check because element with name wont be available initially to bind blur to -->
+    <div dropdown-menu
+         options="someOptions"
+         cs-required="true"
+         form-name="dropdownForm"
+         cs-errors-helper></div>
+    <div ng-messages="userForm.dropdownForm.$error">
+      <!-- notice matching dropdown form from what is passed in to ng-form -->
+      <p class="text-danger" ng-message="required">Please Select Something.</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" name="name" ng-model="user.name" ng-required="true"/>
+    <div ng-messages="userForm.name.$error">
+      <p class="text-danger" ng-message="required">You forgot your name.</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" name="name" ng-model="user.number" ng-minlength="7" ng-required="true"/>
+    <div ng-messages="userForm.name.$error">
+      <p class="text-danger" ng-message="required">You forgot your number.</p>
+
+      <p class="text-danger" ng-message="minlength">Your number is too short.</p>
+    </div>
+  </div>
+
+  <button cs-errors-submit="userForm" ng-click="save()">Create User</button>
+</form>

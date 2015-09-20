@@ -1,5 +1,5 @@
 module cs.errors {
-  cs.csErrors.directive("showErrorsSubmit", (): ng.IDirective => {
+  cs.csErrors.directive("csErrorsSubmit", (): ng.IDirective => {
     return {
       restrict:   "A",
       scope:      false,
@@ -7,8 +7,8 @@ module cs.errors {
       priority:   1, //ensure it is run before ng-click with a 0 priority
       controller: ($scope: Scope, $element: JQuery): void => {
         $element.on("click", (event: JQueryEventObject) => {
-          if ($scope.attrs.showErrorsSubmit !== $scope.formCtrl.$name) {
-            throw "Provided name (" + $scope.attrs.showErrorsSubmit + ") of form does not match:" + $scope.formCtrl.$name;
+          if ($scope.attrs.csErrorsSubmit !== $scope.formCtrl.$name) {
+            throw "Provided name (" + $scope.attrs.csErrorsSubmit + ") of form does not match:" + $scope.formCtrl.$name;
           }
           if ($scope.formCtrl.$invalid) {
             $scope.$emit(errors.Link.REVEAL_ERRORS_EVENT + $scope.formCtrl.$name);
@@ -17,10 +17,7 @@ module cs.errors {
           }
         })
       },
-      link:       (scope: Scope,
-                   element: ng.IAugmentedJQuery,
-                   attrs: Attr,
-                   formCtrl: FormCtrl): void => {
+      link:       (scope: Scope, element: ng.IAugmentedJQuery, attrs: Attr, formCtrl: FormCtrl): void => {
         scope.formCtrl = formCtrl;
         scope.attrs    = attrs;
       }
@@ -28,7 +25,7 @@ module cs.errors {
   });
 
   interface Attr extends ng.IAttributes {
-    showErrorsSubmit: string;
+    csErrorsSubmit: string;
   }
 
   interface FormCtrl extends ng.IFormController {

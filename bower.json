@@ -1,0 +1,30 @@
+{
+  "name": "cs-angular-errors",
+  "version": "1.0.0",
+  "authors": [
+    "Cody Schaaf <codyjschaaf@gmail.com>"
+  ],
+  "description": "Angular form validation done right.",
+  "main": "app/build/index.min.js",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "angular",
+    "form",
+    "error"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "typings"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/codyschaaf/project.git"
+  }
+}
