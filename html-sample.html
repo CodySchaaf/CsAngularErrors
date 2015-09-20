@@ -1,32 +1,37 @@
-<form name="userForm" cs-errors-form novalidate>
-  <div class="form-group" cs-errors="{ needsRenderCheck: true }">
-    <!-- with a custom drop-down directive using render check because element with name wont be available initially to bind blur to -->
-    <div dropdown-menu
-         options="someOptions"
-         cs-required="true"
-         form-name="dropdownForm"
-         cs-errors-helper></div>
-    <div ng-messages="userForm.dropdownForm.$error">
-      <!-- notice matching dropdown form from what is passed in to ng-form -->
-      <p class="text-danger" ng-message="required">Please Select Something.</p>
-    </div>
+<div ng-app="myApp">
+  <div ng-controller="Main as MainCtrl">
+    <form name="userForm" cs-errors-form novalidate>
+      <h5>Create a user here:</h5>
+      <div class="form-group" cs-errors="{ needsRenderCheck: true }">
+        <!-- with a custom drop-down directive using render check because element with name wont be available initially to bind blur to -->
+        <div dropdown-menu
+             options="userTypes"
+             dropdown-menu-required="true"
+             dropdown-menu-name="dropdownForm"
+             cs-errors-helper></div>
+        <div ng-messages="userForm.dropdownForm.$error">
+          <!-- notice matching dropdown form from what is passed in to ng-form -->
+          <p class="text-danger" ng-message="required">Please Select Something.</p>
+        </div>
+      </div>
+      <div cs-errors class="form-group">
+        <input type="text" class="input-s form-control" name="name" ng-model="Main.user.name" placeholder="name" ng-required="true" />
+        <div ng-messages="userForm.name.$error">
+          <p class="text-danger" ng-message="required">You forgot your name.</p>
+        </div>
+      </div>
+
+      <div cs-errors class="form-group">
+        <input type="text" class="input-s form-control" name="number" ng-model="Main.user.number" ng-minlength="7" ng-required="true" placeholder="number" />
+        <div ng-messages="userForm.number.$error">
+          <p class="text-danger" ng-message="required">You forgot your number.</p>
+
+          <p class="text-danger" ng-message="minlength">Your number is too short.</p>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" cs-errors-submit="userForm" ng-click="MainCtrl.save()">Create User</button>
+    </form>
+
   </div>
-
-  <div class="form-group" cs-errors>
-    <input type="text" name="name" ng-model="user.name" ng-required="true"/>
-    <div ng-messages="userForm.name.$error">
-      <p class="text-danger" ng-message="required">You forgot your name.</p>
-    </div>
-  </div>
-
-  <div class="form-group" cs-errors>
-    <input type="text" name="name" ng-model="user.number" ng-minlength="7" ng-required="true"/>
-    <div ng-messages="userForm.name.$error">
-      <p class="text-danger" ng-message="required">You forgot your number.</p>
-
-      <p class="text-danger" ng-message="minlength">Your number is too short.</p>
-    </div>
-  </div>
-
-  <button cs-errors-submit="userForm" ng-click="save()">Create User</button>
-</form>
+</div>
