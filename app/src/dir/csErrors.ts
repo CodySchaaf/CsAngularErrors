@@ -74,7 +74,7 @@ module cs.errors {
     }
 
     private initialize(): void {
-      var inputEl:   ng.IAugmentedJQuery = this.element.find("[name]");
+      var inputEl:   ng.IAugmentedJQuery = angular.element(this.element[0].querySelector("[name]"));
       var inputName: string              = inputEl.attr("name");
       if (!inputName) {throw "cs-errors element has no child input elements with a 'name' attribute";}
 

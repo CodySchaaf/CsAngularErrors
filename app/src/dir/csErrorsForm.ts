@@ -10,11 +10,15 @@ module cs.errors {
           element.addClass(cs.errors.Link.REVEAL_ERRORS_CLASS).removeClass(cs.errors.Link.HIDE_ERRORS_CLASS);
           if (attrs.noScroll !== undefined) {return;}
 
-          var firstErroredElement: JQuery = element.find(".ng-invalid").first();
+          var firstErroredElement: ng.IAugmentedJQuery = angular.element(element[0].querySelector(".ng-invalid"));
           if (firstErroredElement.length !== 0) {
-            angular.element('html, body').animate({
-              scrollTop: firstErroredElement.offset().top - 100 //100 px padding on scroll to top
-            }, 600);
+            if (typeof jQuery == 'undefined') {
+                firstErroredElement[0].scrollIntoView();
+            } else {
+              angular.element('html, body').animate({
+                scrollTop: firstErroredElement.offset().top - 100 //100 px padding on scroll to top
+              }, 600);
+            }
           }
         });
       }

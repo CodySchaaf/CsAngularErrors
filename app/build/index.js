@@ -49,11 +49,11 @@ var cs;
                     /**
                      * needsRenderCheck is used when a custom directive needs to render before the named element would be visible
                      *
-                     * <div class="form-group" show-errors="{ needsRenderCheck: true }">
+                     * <div class="form-group" cs-errors="{ needsRenderCheck: true }">
                      *   <div dropdown-menu
                      *        options="someOptions"
-                     *        cs-required="true" //to be fed to inner ng-required
-                     *        form-name="dropdownForm" //adds name to inner ng-form that needs render check
+                     *        dropdown-menu-required="true" //to be fed to inner ng-required
+                     *        dropdown-menu-name="dropdownForm" //adds name to inner ng-form that needs render check
                      *        cs-errors-helper></div>
                      *   <div ng-messages="outerForm.dropdownForm.$error"> //notice matching dropdown form from what is passed in to ng-form
                      *      <p class="text-danger" ng-message="required">Please Select Something.</p>
@@ -74,7 +74,7 @@ var cs;
             }
             Link.prototype.initialize = function () {
                 var _this = this;
-                var inputEl = this.element.find("[name]");
+                var inputEl = angular.element(this.element[0].querySelector("[name]"));
                 var inputName = inputEl.attr("name");
                 if (!inputName) {
                     throw "cs-errors element has no child input elements with a 'name' attribute";
@@ -122,11 +122,16 @@ var cs;
                         if (attrs.noScroll !== undefined) {
                             return;
                         }
-                        var firstErroredElement = element.find(".ng-invalid").first();
+                        var firstErroredElement = angular.element(element[0].querySelector(".ng-invalid"));
                         if (firstErroredElement.length !== 0) {
-                            angular.element('html, body').animate({
-                                scrollTop: firstErroredElement.offset().top - 100 //100 px padding on scroll to top
-                            }, 600);
+                            if (typeof jQuery == 'undefined') {
+                                firstErroredElement[0].scrollIntoView();
+                            }
+                            else {
+                                angular.element('html, body').animate({
+                                    scrollTop: firstErroredElement.offset().top - 100 //100 px padding on scroll to top
+                                }, 600);
+                            }
                         }
                     });
                 }
