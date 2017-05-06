@@ -1,4 +1,4 @@
-# CsAngularErrors
+# CsAngularErrors - ([Tutorial](http://blog.codyschaaf.com/angular/2015/09/14/angular-form-errors.html))
 
 Angular form validation with errors. These directives work in together to apply nice error message handling to 
 Angular forms. They will hide error messages on load, and then only reveal invalid fields on blur, or when the user
@@ -55,4 +55,4 @@ a ssn or a name input field). To get this working pass in `{ multiInput: true }`
 
 ###More Info
 
-To see a step-by-step tutorial of the creation of these directives check out my [blog](http://blog.codyschaaf.com/2015/09/14/angular-form-errors.html)
+To see a step-by-step tutorial of the creation of these directives check out my [blog](http://blog.codyschaaf.com/angular/2015/09/14/angular-form-errors.html)
